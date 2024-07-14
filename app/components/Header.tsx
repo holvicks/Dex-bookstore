@@ -5,9 +5,17 @@ import Link from 'next/link';
 import { FaRegUser, FaBars, FaTimes } from 'react-icons/fa';
 import { MdPublish } from "react-icons/md";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import signout from "../logout/actions";
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [profile, setProfile] =useState(false);
+
+  const toggleProfile = () => {
+    setProfile(!profile)
+  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -31,11 +39,31 @@ const Header = () => {
         <Link href="/login">
         Login/Signup
         </Link>
-          
         </Button>
-        <Link href="/profile" aria-label="Profile" className="hover:text-[#4338CA]">
+
+        <form action={signout}>
+        <Button type="submit">Signout</Button>
+      </form>
+        {/* <Link href="/profile" aria-label="Profile" className="hover:text-[#4338CA]">
           <FaRegUser />
-        </Link>
+        </Link> */}
+        {/* <div className='relative  pointer'>
+        <Avatar onClick={toggleProfile} >
+        <AvatarImage src="https://github.com/shadcn.png"  className='pointer'/>
+        <AvatarFallback className='pointer'>CN</AvatarFallback>
+      </Avatar>
+
+      {profile && (
+          <ul className="absolute right-0 min-w-[150px] rounded-lg p-2 top-full bg-white flex flex-col gap-2 mt-3 shadow-lg z-50">
+            <li className="hover:bg-gray-100 px-2 py-1 cursor-pointer">Your Profile</li>
+            <li className="hover:bg-gray-100 px-2 py-1 cursor-pointer">Settings</li>
+            <li className="hover:bg-gray-100 px-2 py-1 cursor-pointer">Signout</li>
+          </ul>
+        )}
+
+      </div> */}
+       
+
         <button onClick={toggleMenu} className="md:hidden focus:outline-none" aria-label="Toggle Menu">
           {isMenuOpen ? (
             <FaTimes className="h-6 w-6 text-black" />
