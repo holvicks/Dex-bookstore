@@ -1,3 +1,4 @@
+// logout/actions.ts
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
@@ -10,9 +11,9 @@ const signout = async () => {
   const { error } = await supabase.auth.signOut();
 
   if (error) {
-    console.error("Error signing out:", error);
+    console.error("Error signing out:", error.message);
     redirect("/");
-    return; // Exit function if there's an error
+    return;
   }
 
   // Perform any necessary revalidation or navigation

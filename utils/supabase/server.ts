@@ -1,4 +1,5 @@
-import { createServerClient, type CookieOptions } from '@supabase/ssr'
+// server.ts
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 export function createClient() {
@@ -26,4 +27,10 @@ export function createClient() {
       },
     }
   )
+}
+
+export async function checkAuth() {
+  const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  return user
 }
